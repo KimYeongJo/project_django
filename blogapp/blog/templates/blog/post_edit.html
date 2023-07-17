@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{% url 'blog:post-edit' id=post.pk %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="수정">
+    </form>
+    <a href="{% url 'blog:post-detail' id=post.pk %}">수정 취소</a>
+{% endblock %}

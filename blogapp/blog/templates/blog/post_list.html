@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>블로그 게시판</p>
+    <form action="{% url 'blog:post-write' %}" method="get">
+        <input type="submit" value="글 작성">
+    </form>
+    {% if posts %}
+        <table>
+            <thead>
+                <tr>
+                    <td>제목</td>
+                    <td>내용</td>
+                    <td>카테고리</td>
+                    <td>생성일자</td>
+                    <td>수정일자</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.title }}</a></td>
+                        <td>{{ post.content }}</td>
+                        <td>{{ post.category }}</td>
+                        <td>{{ post.created_at }}</td>
+                        <td>{{ post.updated_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>작성된 게시물이 없습니다.</p>
+    {% endif %}
+
+
+{% endblock %}

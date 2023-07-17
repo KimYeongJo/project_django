@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Index page</h1>
+    <h2>김영조의 블로그</h2>
+    <a href="{% url 'blog:post-list' %}">블로그 입장하기</a>
+{% endblock %}
