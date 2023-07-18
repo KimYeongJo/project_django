@@ -12,13 +12,15 @@
 </head>
 <body>
     <div>
-        {% comment %} {% if user.is_authenticated %}
-            <p>Welcome, {{ user.email }}</P>
-            <a href="{% url 'user:logout' %}">Logout</a>
+        <a href="{% url 'index' %}">메인으로</a>
+        {% if user.is_authenticated %}
+            <p>어서오세요, {{ user.username }}</P>
+            <a href="{% url 'user:logout' %}">로그아웃</a>
         {% else %}
-            <P>Please, Login</P>
-            <a href="{% url 'user:login' %}">Login</a>
-        {% endif %} {% endcomment %}
+            <P>로그인 하세요</P>
+            <a href="{% url 'user:login' %}">로그인</a>
+            <a href="{% url 'user:register' %}">회원가입</a>
+        {% endif %}
         <h1>Blog</h1>
         {% block content %}
         {% endblock %}

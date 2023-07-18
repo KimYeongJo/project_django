@@ -22,6 +22,7 @@
                         <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.title }}</a></td>
                         <td>{{ post.content }}</td>
                         <td>{{ post.category }}</td>
+                        <td>{{ post.writer }}</td>
                         <td>{{ post.created_at }}</td>
                         <td>{{ post.updated_at }}</td>
                     </tr>
