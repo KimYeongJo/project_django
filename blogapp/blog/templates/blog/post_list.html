@@ -32,6 +32,23 @@
     {% else %}
         <p>작성된 게시물이 없습니다.</p>
     {% endif %}
+    
+    <form id="search-form" action="" method="get">
+        카테고리 검색 : <input id="search-input" type="text"/>
+        <input type="submit" value="검색">
+    </form>
+    <script>
+        const form = document.querySelector('#search-form')
+        const input = document.querySelector('#search-input')
+        input.addEventListener('input', () => {
+            value = input.value
+            form.action = `{% url 'blog:post-search' tag="${value}" %}`
+            console.log(value)
+        });
+    </script>
 
-
+    {% comment %} <form action="{% url 'blog:post-search' tag="test" %}" method="get">
+        카테고리별 검색 : <input type="text" name="tag">
+        <input type="submit" value="검색">
+    </form> {% endcomment %}
 {% endblock %}

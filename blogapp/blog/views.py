@@ -78,14 +78,19 @@ class PostEdit(View):
 
 class PostDelete(View):
     def post(self, request, id):
+        print(id)
         post = get_object_or_404(Post, pk=id)
         post.delete()
         return redirect('blog:post-list')
     
 
 class PostSearch(View):
-    def get(self, request):
+    def get(self, request, tag):
+        print(request.GET)
+        post_objs = Post.objects.filter(category=tag)
+        print(tag)
         context = {
-            
+            'title': 'Main Page',
+            'posts': post_objs,
         }
-        return render(request, 'blog/post_search.html', context)
+        return render(request, 'blog/post_list.html', context)
