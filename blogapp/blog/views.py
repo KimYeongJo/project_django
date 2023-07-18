@@ -51,7 +51,8 @@ class PostEdit(View):
         post = get_object_or_404(Post, pk=id)
         form = PostForm(initial=
                         {'title': post.title,
-                         'content': post.content, 'category': post.category
+                         'content': post.content,
+                         'category': post.category
                          })
         context = {
             'title': 'Edit',
@@ -78,7 +79,6 @@ class PostEdit(View):
 
 class PostDelete(View):
     def post(self, request, id):
-        print(id)
         post = get_object_or_404(Post, pk=id)
         post.delete()
         return redirect('blog:post-list')
@@ -86,9 +86,7 @@ class PostDelete(View):
 
 class PostSearch(View):
     def get(self, request, tag):
-        print(request.GET)
         post_objs = Post.objects.filter(category=tag)
-        print(tag)
         context = {
             'title': 'Main Page',
             'posts': post_objs,

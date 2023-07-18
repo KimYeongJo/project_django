@@ -28,7 +28,6 @@
                 {% endfor %}
             </tbody>
         </table>
-
     {% else %}
         <p>작성된 게시물이 없습니다.</p>
     {% endif %}
@@ -41,14 +40,9 @@
         const form = document.querySelector('#search-form')
         const input = document.querySelector('#search-input')
         input.addEventListener('input', () => {
-            value = input.value
-            form.action = `{% url 'blog:post-search' tag="${value}" %}`
-            console.log(value)
+            s = `{% url 'blog:post-search' tag="value" %}`
+            s = s.replaceAll('value', input.value)
+            form.action = s
         });
     </script>
-
-    {% comment %} <form action="{% url 'blog:post-search' tag="test" %}" method="get">
-        카테고리별 검색 : <input type="text" name="tag">
-        <input type="submit" value="검색">
-    </form> {% endcomment %}
 {% endblock %}
