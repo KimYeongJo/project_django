@@ -4,7 +4,7 @@
     <p>블로그 글 작성 화면</p>
     <!-- 제목 -->
     <!-- 내용 -->
-    <form action="{% url 'blog:post-write' %}" method="post">
+    <form action="{% url 'blog:post-write' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value='작성 완료'>

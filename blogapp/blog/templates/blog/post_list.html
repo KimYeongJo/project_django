@@ -43,7 +43,7 @@
     <script>
         const form = document.querySelector('#search-form')
         const input = document.querySelector('#search-input')
-        form.addEventListener('submit', () => {
+        input.addEventListener('input', () => {
             s = `{% url 'blog:post-search' tag="value" %}`
             s = s.replaceAll('value', input.value)
             form.action = s

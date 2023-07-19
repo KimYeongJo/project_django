@@ -9,6 +9,10 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username']
+        labels = {
+            'username': '아이디',
+            'password': '비밀번호'
+        }
 
 
 class LoginForm(AuthenticationForm):
@@ -16,3 +20,7 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+        labels = {
+            'username': '아이디',
+            'password': '비밀번호'
+        }

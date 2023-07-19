@@ -7,6 +7,7 @@ User = get_user_model()
 class Post(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
+    imgfile = models.ImageField(null=True, upload_to="", blank=True)
     category = models.CharField(max_length=10)
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     count = models.PositiveIntegerField(default=0)

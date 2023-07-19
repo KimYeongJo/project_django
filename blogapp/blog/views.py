@@ -37,7 +37,7 @@ class PostWrite(LoginRequiredMixin, View):
         return render(request, 'blog/post_write.html', context)
         
     def post(self, request):
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.writer = request.user
@@ -56,6 +56,7 @@ class PostEdit(LoginRequiredMixin, View):
         form = PostForm(initial=
                         {'title': post.title,
                          'content': post.content,
+                         'imgfile': post.imgfile,
                          'category': post.category
                          })
         context = {
@@ -67,11 +68,12 @@ class PostEdit(LoginRequiredMixin, View):
     
     def post(self, request, id):
         post = get_object_or_404(Post, pk=id)
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post.title = form.cleaned_data['title']
             post.content = form.cleaned_data['content']
             post.category = form.cleaned_data['category']
+            post.imgfile = form.cleaned_data['imgfile']
             post.save()
             return redirect('blog:post-detail', id=id)
         context = {
