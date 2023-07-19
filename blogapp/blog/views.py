@@ -73,6 +73,9 @@ class PostEdit(LoginRequiredMixin, View):
             post.title = form.cleaned_data['title']
             post.content = form.cleaned_data['content']
             post.category = form.cleaned_data['category']
+            if form.cleaned_data['imgfile'] == None:
+                post.save()
+                return redirect('blog:post-detail', id=id)
             post.imgfile = form.cleaned_data['imgfile']
             post.save()
             return redirect('blog:post-detail', id=id)

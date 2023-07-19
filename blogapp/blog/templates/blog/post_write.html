@@ -2,8 +2,6 @@
 
 {% block content %}
     <p>블로그 글 작성 화면</p>
-    <!-- 제목 -->
-    <!-- 내용 -->
     <form action="{% url 'blog:post-write' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
