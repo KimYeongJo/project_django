@@ -21,4 +21,11 @@ class Comment(models.Model):
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    son_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+
+
+class Recomment(models.Model):
+    comment = models.ForeignKey('Comment', on_delete=models.CASCADE)
+    content = models.TextField()
+    writer = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
