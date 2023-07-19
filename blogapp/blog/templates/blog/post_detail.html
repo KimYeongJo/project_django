@@ -20,5 +20,31 @@
             <input type="submit" value="삭제">
         </form>
     {% endif %}
+    <hr>
+
+    <!-- 댓글 작성 -->
+    <form action="{% url 'blog:cm-write' id=post.pk %}" method="post">
+        {% csrf_token %}
+        {{ comment_form.content }}
+        <input type="submit" value="댓글 작성">
+    </form>
+
+    <!-- 댓글 구현, 삭제 -->
+    {% if comments %}
+        <ul>
+        {% for comment in comments %}
+            <li>{{ comment.content }} / {{ comment.writer}}
+            {% if comment.writer == request.user %}
+                <form action="{% url 'blog:cm-delete' id=comment.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="삭제">
+                </form>
+            {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>댓글이 없습니다.</p>
+    {% endif %}
     <a href="{% url 'blog:post-list' %}">목록으로 돌아가기</a>
 {% endblock %}

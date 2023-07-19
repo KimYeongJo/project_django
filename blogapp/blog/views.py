@@ -17,12 +17,18 @@ class PostList(View):
 
 class PostDetail(View):
     def get(self, request, id):
-        post = get_object_or_404(Post, pk=id)
+        post = Post.objects.prefetch_related('comment_set').get(pk=id)
         post.count += 1
         post.save()
+
+        comments = post.comment_set.all()
+        comment_form = CommentForm()
+
         context = {
             'title': '상세페이지',
-            'post': post
+            'post': post,
+            'comments': comments,
+            'comment_form': comment_form
         }
         return render(request, 'blog/post_detail.html', context)
     
@@ -104,3 +110,29 @@ class PostSearch(View):
             'posts': post_objs
         }
         return render(request, 'blog/post_list.html', context)
+    
+
+class CommentWrite(LoginRequiredMixin, View):
+    def post(self, request, id):
+        post = get_object_or_404(Post, pk=id)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            content = form.cleaned_data['content']
+            writer = request.user
+            comment = Comment.objects.create(post=post, content=content, writer=writer)
+            return redirect('blog:post-detail', id=id)
+        context = {
+            'title': "상세보기",
+            'post': post,
+            'comments': post.comment_set.all(),
+            'comment_form': form
+        }
+        return render(request, 'blog/post_detail.html', context)
+
+
+class CommentDelete(View):
+    def post(self, request, id):
+        comment = Comment.objects.get(pk=id)
+        post_id = comment.post.id
+        comment.delete()
+        return redirect('blog:post-detail', id=post_id)
