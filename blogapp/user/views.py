@@ -36,11 +36,12 @@ class Login(View):
     def post(self, request):
         if request.user.is_authenticated:
             return redirect('blog:post-list')
-        form = LoginForm(request.POST)
+        form = LoginForm(request, request.POST)
+        
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(username = username, password = password)
+            user = authenticate(username=username, password=password)
 
             if user:
                 login(request, user)
