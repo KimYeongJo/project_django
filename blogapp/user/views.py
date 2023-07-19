@@ -20,6 +20,12 @@ class Register(View):
         if form.is_valid():
             user = form.save()
             return redirect('user:login')
+        
+        context = {
+            'title': '회원가입',
+            'form': form
+        }
+        return render(request, 'user/login.html', context)
 
 
 class Login(View):
@@ -37,7 +43,8 @@ class Login(View):
         if request.user.is_authenticated:
             return redirect('blog:post-list')
         form = LoginForm(request, request.POST)
-        
+        nxt = request.POST.get('next')
+
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -45,15 +52,18 @@ class Login(View):
 
             if user:
                 login(request, user)
-                return redirect('index')
+                if nxt == "":
+                    return redirect('index')
+                return redirect(nxt)
         context = {
             'title': '로그인',
-            'form': form
+            'form': form,
         }
         return render(request, 'user/login.html', context)
 
 
 class Logout(View):
     def get(self, request):
+        nxt = request.GET.get('next')
         logout(request)
-        return redirect('index')
+        return redirect(nxt)

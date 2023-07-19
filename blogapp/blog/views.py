@@ -17,7 +17,9 @@ class PostList(View):
 
 class PostDetail(View):
     def get(self, request, id):
-        post = Post.objects.get(pk=id)
+        post = get_object_or_404(Post, pk=id)
+        post.count += 1
+        post.save()
         context = {
             'title': '상세페이지',
             'post': post
@@ -88,7 +90,10 @@ class PostDelete(LoginRequiredMixin, View):
 
 class PostSearch(View):
     def get(self, request, tag):
-        post_objs = Post.objects.filter(category=tag)
+        if tag == "*":
+            post_objs = Post.objects.all()
+        else:
+            post_objs = Post.objects.filter(category=tag)
         context = {
             'title': '블로그',
             'posts': post_objs

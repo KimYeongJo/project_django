@@ -12,6 +12,8 @@
                     <td>제목</td>
                     <td>내용</td>
                     <td>카테고리</td>
+                    <td>작성자</td>
+                    <td>조회수</td>
                     <td>생성일자</td>
                     <td>수정일자</td>
                 </tr>
@@ -20,11 +22,12 @@
                 {% for post in posts %}
                     <tr>
                         <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.title }}</a></td>
-                        <td>{{ post.content }}</td>
-                        <td>{{ post.category }}</td>
-                        <td>{{ post.writer }}</td>
-                        <td>{{ post.created_at }}</td>
-                        <td>{{ post.updated_at }}</td>
+                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.content }}</a></td>
+                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.category }}</a></td>
+                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.writer }}</a></td>
+                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.count }}</a></td>
+                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.created_at }}</a></td>
+                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.updated_at }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -40,7 +43,7 @@
     <script>
         const form = document.querySelector('#search-form')
         const input = document.querySelector('#search-input')
-        input.addEventListener('input', () => {
+        form.addEventListener('submit', () => {
             s = `{% url 'blog:post-search' tag="value" %}`
             s = s.replaceAll('value', input.value)
             form.action = s
