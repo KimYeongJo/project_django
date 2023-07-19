@@ -133,6 +133,6 @@ class CommentWrite(LoginRequiredMixin, View):
 class CommentDelete(View):
     def post(self, request, id):
         comment = Comment.objects.get(pk=id)
-        post_id = comment.post.id
+        post_id = comment.post.pk
         comment.delete()
         return redirect('blog:post-detail', id=post_id)
