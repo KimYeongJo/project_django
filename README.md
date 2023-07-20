@@ -49,28 +49,37 @@ project_django_blog
 ![메인화면](./readme_files/메인화면.PNG)
 
 * 회원가입
+
 ![회원가입](./readme_files/회원가입.PNG)
 
 * 로그인
+
 ![로그인](./readme_files/로그인후.PNG)
 
 * 블로그 첫 화면
+
 ![블로그첫화면](./readme_files/글없는블로그.PNG)
 
 * 글 작성 화면
+
 ![글작성화면](./readme_files/글작성화면.PNG)
 
 * 글 작성된 화면
+
 ![글작성된화면](./readme_files/글작성된화면.PNG)
 
 * 카테고리 검색 화면
+
 ![글검색화면](./readme_files/글검색화면.PNG)
 
 * 상세보기 화면
+
 ![디테일화면](./readme_files/디테일화면.PNG)
 
 * 글 수정 화면
+
 ![글수정화면](./readme_files/글수정화면.PNG)
 
 * 글 수정된 화면
+
 ![글수정된화면](./readme_files/글수정된화면.PNG)
