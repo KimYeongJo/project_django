@@ -20,7 +20,7 @@ class Comment(models.Model):
     content = models.TextField()
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    # recomments = models.ManyToManyField("Recomment")
 
 class Recomment(models.Model):
     comment = models.ForeignKey('Comment', on_delete=models.CASCADE)

@@ -24,9 +24,17 @@ class PostDetail(View):
         comments = post.comment_set.all()
         comment_form = CommentForm()
 
+        recomments = []
+        for comment in comments:
+            # recomment = Comment.objects.prefetch_related('recomment_set').get(pk=comment.pk)
+            recomment = comment.recomment.all()
+            recomments += recomment
+
         # comment = Comment.objects.prefetch_related('recomment_set').all()
 
         # recomments = comment.recomment_set.all()
+        # recomments = Recomment.objects.select_related('Comment__post').get(pk=comment)
+
         recomment_form = RecommentForm()
 
         context = {
@@ -34,7 +42,7 @@ class PostDetail(View):
             'post': post,
             'comments': comments,
             'comment_form': comment_form,
-            # 'recomments': recomments,
+            'recomments': recomments,
             'recomment_form': recomment_form
         }
         return render(request, 'blog/post_detail.html', context)
@@ -153,7 +161,6 @@ class RecommentWrite(LoginRequiredMixin, View):
             content = form.cleaned_data['content']
             writer = request.user
             recomment = Recomment.objects.create(comment=comment, content=content, writer=writer)
-            print(recomment)
             return redirect('blog:post-detail', id=id)
         
 
