@@ -45,6 +45,7 @@ project_django_blog
 
 ## 4. 동작 화면
 * 메인화면
+
 ![메인화면](./readme_files/메인화면.PNG)
 
 * 회원가입
