@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils import timezone
 
-# Create your models here.
+
 class UserManager(BaseUserManager):
     def _create_user(self, username, password, is_staff, is_superuser, **extra_fields):
         now = timezone.localtime()
@@ -25,6 +25,7 @@ class UserManager(BaseUserManager):
     
     def create_superuser(self, username, password, **extra_fields):
         return self._create_user(username, password, True, True, **extra_fields)
+    
     
 class User(AbstractUser):
     username = models.CharField(unique=True, max_length=20)

@@ -4,7 +4,7 @@ from .models import *
 from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# Create your views here.
+
 class PostList(View):
     def get(self, request):
         post_objs = Post.objects.all()
@@ -26,7 +26,7 @@ class PostDetail(View):
 
         recomments = []
         for comment in comments:
-            recomment = Recomment.objects.filter(comment=comment)
+            recomment = Recomment.objects.filter(comment=comment.pk)
             recomments += recomment
         recomment_form = RecommentForm()
 
@@ -134,7 +134,7 @@ class CommentWrite(LoginRequiredMixin, View):
 
         recomments = []
         for comment in comments:
-            recomment = Recomment.objects.filter(comment=comment)
+            recomment = Recomment.objects.filter(comment=comment.pk)
             recomments += recomment
         recomment_form = RecommentForm()
         
@@ -172,7 +172,7 @@ class RecommentWrite(LoginRequiredMixin, View):
 
         recomments = []
         for comment in comments:
-            recomment = Recomment.objects.filter(comment=comment)
+            recomment = Recomment.objects.filter(comment=comment.pk)
             recomments += recomment
         recomment_form = RecommentForm()
         

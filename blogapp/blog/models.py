@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-# Create your models here.
+
 class Post(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
@@ -20,6 +20,7 @@ class Comment(models.Model):
     content = models.TextField()
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+
 
 class Recomment(models.Model):
     comment = models.ForeignKey('Comment', on_delete=models.CASCADE)

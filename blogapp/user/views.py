@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from .forms import *
 
-# Create your views here.
+
 class Register(View):
     def get(self, request):
         if request.user.is_authenticated:
