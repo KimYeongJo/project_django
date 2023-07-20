@@ -83,3 +83,12 @@ project_django_blog
 * 글 수정된 화면
 
 ![글수정된화면](./readme_files/글수정된화면.PNG)
+
+* 댓글, 대댓글 화면
+
+![댓글대댓글화면](./readme_files/댓글대댓글화면.PNG)
+
+* 로그아웃 유저 화면
+
+![로그아웃화면](./readme_files/로그아웃화면.PNG)
+![로그아웃디테일](./readme_files/로그아웃디테일.PNG)
