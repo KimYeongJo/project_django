@@ -23,14 +23,12 @@
 ```
 project_django_blog
 └─blogapp
-     |
      ├─app
      ├─blog
      |  ├─migrations
      |  └─templates
      |        └─blog
      ├─media
-     ├─static
      ├─templates
      ├─user
      |  ├─migrations
