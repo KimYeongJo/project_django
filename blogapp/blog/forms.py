@@ -25,5 +25,4 @@ class RecommentForm(forms.ModelForm):
 
     class Meta:
         model = Recomment
-        # fields = ['content']
         fields = ['content', 'comment']

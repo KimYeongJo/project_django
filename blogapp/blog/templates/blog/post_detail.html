@@ -33,7 +33,7 @@
     {% if comments %}
         <ul>
         {% for comment in comments %}
-            <li>{{ comment.content }} / {{ comment.writer }}
+            <li>댓글 : {{ comment.content }} / {{ comment.writer }}
             {% if comment.writer == request.user %}
                 <form action="{% url 'blog:cm-delete' id=comment.pk %}" method="post">
                     {% csrf_token %}
@@ -43,14 +43,16 @@
             {% if recomments %}
                 <ul>
                 {% for recomment in recomments %}
-                    <li>{{ recomment.content }} / {{recomment.writer }}
-                        {% comment %} {% if recomment.writer == request.user %}
+                    {% if recomment.comment == comment %}
+                        <li>답글 : {{ recomment.content }} / {{recomment.writer }}
+                        {% if recomment.writer == request.user %}
                             <form action="{% url 'blog:rcm-delete' id=recomment.pk %}" method="post">
                                 {% csrf_token %}
                                 <input type="submit" value="삭제">
                             </form>
-                        {% endif %} {% endcomment %}
-                    </li>
+                        {% endif %}
+                        </li>
+                    {% endif %}
                 {% endfor %}
                 </ul>
             {% endif %}

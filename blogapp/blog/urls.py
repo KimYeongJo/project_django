@@ -13,5 +13,5 @@ urlpatterns = [
     path("<int:id>/comment/write/", views.CommentWrite.as_view(), name='cm-write'),
     path("comment/delete/<int:id>/", views.CommentDelete.as_view(), name='cm-delete'),
     path("comment/<int:id>/recomment/write", views.RecommentWrite.as_view(), name='rcm-write'),
-    # path("recomment/delete/<int:id>/", views.RecommentDelete.as_view(), name='rcm-delete'),
+    path("recomment/delete/<int:id>/", views.RecommentDelete.as_view(), name='rcm-delete')
 ]

@@ -26,15 +26,8 @@ class PostDetail(View):
 
         recomments = []
         for comment in comments:
-            # recomment = Comment.objects.prefetch_related('recomment_set').get(pk=comment.pk)
-            recomment = comment.recomment.all()
+            recomment = Recomment.objects.filter(comment=comment)
             recomments += recomment
-
-        # comment = Comment.objects.prefetch_related('recomment_set').all()
-
-        # recomments = comment.recomment_set.all()
-        # recomments = Recomment.objects.select_related('Comment__post').get(pk=comment)
-
         recomment_form = RecommentForm()
 
         context = {
@@ -136,11 +129,22 @@ class CommentWrite(LoginRequiredMixin, View):
             writer = request.user
             comment = Comment.objects.create(post=post, content=content, writer=writer)
             return redirect('blog:post-detail', id=id)
+        
+        comments = post.comment_set.all()
+
+        recomments = []
+        for comment in comments:
+            recomment = Recomment.objects.filter(comment=comment)
+            recomments += recomment
+        recomment_form = RecommentForm()
+        
         context = {
             'title': "상세보기",
             'post': post,
-            'comments': post.comment_set.all(),
-            'comment_form': form
+            'comments': comments,
+            'comment_form': form,
+            'recomments': recomments,
+            'recomment_form': recomment_form
         }
         return render(request, 'blog/post_detail.html', context)
 
@@ -163,10 +167,29 @@ class RecommentWrite(LoginRequiredMixin, View):
             recomment = Recomment.objects.create(comment=comment, content=content, writer=writer)
             return redirect('blog:post-detail', id=id)
         
+        post = Post.objects.prefetch_related('comment_set').get(pk=id)
+        comments = post.comment_set.all()
 
-# class RecommentDelete(LoginRequiredMixin, View):
-#     def post(self, request, id):
-#         recomment = Recomment.objects.get(pk=id)
-#         comment_id = recomment.comment.pk
-#         recomment.delete()
-#         return redirect('blog:post-detail', id=comment_id)
+        recomments = []
+        for comment in comments:
+            recomment = Recomment.objects.filter(comment=comment)
+            recomments += recomment
+        recomment_form = RecommentForm()
+        
+        context = {
+            'title': "상세보기",
+            'post': post,
+            'comments': comments,
+            'comment_form': form,
+            'recomments': recomments,
+            'recomment_form': recomment_form
+        }
+        return render(request, 'blog/post_detail.html', context)
+        
+
+class RecommentDelete(LoginRequiredMixin, View):
+    def post(self, request, id):
+        recomment = get_object_or_404(Recomment, pk=id)
+        post_id = recomment.comment.post.pk
+        recomment.delete()
+        return redirect('blog:post-detail', id=post_id)
