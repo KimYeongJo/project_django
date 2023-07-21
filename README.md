@@ -63,6 +63,8 @@ project_django_blog
 
 ![로그인](./readme_files/로그인후.PNG)
 
+로그인 시 기존 url로 넘어갑니다.
+
 * 블로그 첫 화면
 
 ![블로그첫화면](./readme_files/글없는블로그.PNG)
