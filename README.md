@@ -14,8 +14,15 @@
 * 댓글 CRD
 * 대댓글 CRD
 
-## 2. 배포 URL
-* 미완성
+## 2. 개발 환경 및 배포 URL
+
+### 2.1 개발 환경
+* python==3.11.3
+* Django==3.2
+* Pillow==10.0.0
+
+### 2.2 배포 URL
+* 미배포
 
 ## 3. 프로젝트 구조 및 개발 일정
 
@@ -37,7 +44,7 @@ project_django_blog
      └─venv
 ```
 
-### 3.2 DB 구조
+### 3.2 ERD 구조
 ![DBTable](./readme_files/DB_table.PNG)
 
 ### 3.3 개발 일정
