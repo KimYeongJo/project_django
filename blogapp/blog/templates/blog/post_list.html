@@ -1,33 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p>블로그 게시판</p>
-    <form action="{% url 'blog:post-write' %}" method="get">
-        <input type="submit" value="글 작성">
-    </form>
+    <div class="d-flex justify-content-end me-4 mt-4">
+        <a class="btn btn-outline-secondary me-2" href="{% url 'blog:post-list' %}">목록</a>
+        <form action="{% url 'blog:post-write' %}" method="get">
+            <input class="btn btn-dark" type="submit" value="글쓰기">
+        </form>
+    </div>
     {% if posts %}
-        <table>
-            <thead>
+        <table class="table table-hover align-middle">
+            <thead class="text-center">
                 <tr>
-                    <td>제목</td>
-                    <td>내용</td>
-                    <td>카테고리</td>
-                    <td>작성자</td>
-                    <td>조회수</td>
-                    <td>생성일자</td>
-                    <td>수정일자</td>
+                    <th>번호</th>
+                    <th>카테고리</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>작성자</th>
+                    <th>조회수</th>
+                    <th>생성일자</th>
+                    <th>수정일자</th>
                 </tr>
             </thead>
             <tbody>
                 {% for post in posts %}
                     <tr>
-                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.title }}</a></td>
-                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.content }}</a></td>
-                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.category }}</a></td>
-                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.writer }}</a></td>
-                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.count }}</a></td>
-                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.created_at }}</a></td>
-                        <td><a href="{% url 'blog:post-detail' id=post.pk %}">{{ post.updated_at }}</a></td>
+                        <th class="text-center"><a class="btn" href="{% url 'blog:post-detail' id=post.pk %}">{{ post.pk }}</a></th>
+                        <td class="text-center"><a class="btn" href="{% url 'blog:post-detail' id=post.pk %}">{{ post.category }}</a></td>
+                        <td class="text-center"><a class="btn" href="{% url 'blog:post-detail' id=post.pk %}">{{ post.title }}</a></td>
+                        <td><a class="btn" href="{% url 'blog:post-detail' id=post.pk %}">{{ post.content }}</a></td>
+                        <td><a class="btn" href="{% url 'blog:post-detail' id=post.pk %}">{{ post.writer }}</a></td>
+                        <td class="text-center"><a class="btn" href="{% url 'blog:post-detail' id=post.pk %}">{{ post.count }}</a></td>
+                        <td class="text-center"><a class="btn" href="{% url 'blog:post-detail' id=post.pk %}">{{ post.created_at }}</a></td>
+                        <td class="text-center"><a class="btn" href="{% url 'blog:post-detail' id=post.pk %}">{{ post.updated_at }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -35,18 +39,19 @@
     {% else %}
         <p>작성된 게시물이 없습니다.</p>
     {% endif %}
-    
-    <form id="search-form" action="" method="get">
-        카테고리 검색 : <input id="search-input" type="text"/>
-        <input type="submit" value="검색">
-    </form>
-    <script>
-        const form = document.querySelector('#search-form')
-        const input = document.querySelector('#search-input')
-        input.addEventListener('input', () => {
-            s = `{% url 'blog:post-search' tag="value" %}`
-            s = s.replaceAll('value', input.value)
-            form.action = s
-        });
-    </script>
+    <div class="d-flex justify-content-center my-3">
+        <form id="search-form" action="" method="get">
+            카테고리 검색 : <input id="search-input" type="text"/>
+            <input type="submit" value="검색">
+        </form>
+        <script>
+            const form = document.querySelector('#search-form')
+            const input = document.querySelector('#search-input')
+            input.addEventListener('input', () => {
+                s = `{% url 'blog:post-search' tag="value" %}`
+                s = s.replaceAll('value', input.value)
+                form.action = s
+            });
+        </script>
+    </div>
 {% endblock %}

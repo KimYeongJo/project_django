@@ -53,7 +53,7 @@ class Login(View):
             if user:
                 login(request, user)
                 if nxt == "":
-                    return redirect('index')
+                    return redirect('blog:post-list')
                 return redirect(nxt)
         context = {
             'title': '로그인',
